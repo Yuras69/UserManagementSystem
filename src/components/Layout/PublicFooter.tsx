@@ -1,10 +1,11 @@
-import React from 'react'
 
 const PublicFooter = () => {
   return (
-    <div>
-      Footer
-    </div>
+    <footer className="flex h-12 items-center justify-center border-t">
+      <div className="text-sm">
+        &copy; {new Date().getFullYear()} Your Company. All rights reserved.
+      </div>
+    </footer>
   )
 }
 

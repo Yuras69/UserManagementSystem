@@ -6,6 +6,7 @@ import { NavigationMenu, NavigationMenuItem, NavigationMenuLink, NavigationMenuL
 import { cn } from "@/lib/utils";
 import { ArrowUpRight, TextAlignJustify } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
+import { useNavigate } from 'react-router-dom'
 
 export type NavigationSection = {
   title: string;
@@ -36,8 +37,8 @@ const navigationData: NavigationSection[] = [
 
 ];
 
-const CollaborateButton = ({ className }: { className?: string }) => (
-  <Button className={cn("relative text-sm font-medium rounded-full h-10 p-1 ps-4 pe-12 group transition-all duration-500 hover:ps-12 hover:pe-4 w-fit overflow-hidden hover:bg-primary/80", className)}>
+const CollaborateButton = ({ className, onClick }: { className?: string, onClick?: () => void }) => (
+  <Button onClick={onClick} className={cn("relative text-sm font-medium rounded-full h-10 p-1 ps-4 pe-12 group transition-all duration-500 hover:ps-12 hover:pe-4 w-fit overflow-hidden hover:bg-primary/80", className)}>
     <span className="relative z-10 transition-all duration-500 hover:cursor-pointer">
       Add User
     </span>
@@ -50,6 +51,7 @@ const CollaborateButton = ({ className }: { className?: string }) => (
 const Navbar = () => {
   const [sticky, setSticky] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate()
   const handleScroll = useCallback(() => {
     setSticky(window.scrollY >= 50);
   }, []);
@@ -99,7 +101,7 @@ const Navbar = () => {
                 </NavigationMenuList>
               </NavigationMenu>
             </div>
-            <CollaborateButton className="hidden lg:flex" />
+            <CollaborateButton className="hidden lg:flex" onClick={() => navigate('/add-user')} />
 
             <div className="lg:hidden">
               <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
