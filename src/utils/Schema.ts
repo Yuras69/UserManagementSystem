@@ -1,35 +1,37 @@
-import { z } from "zod"
+import { z } from "zod";
 
 export const UserSchema = z.object({
   FirstName: z
     .string()
-    .min(4, "Name must be at least 4 characters.")
-    .max(32, "Name must be at most 32 characters."),
-    LastName: z
-    .string()
-    .min(4, "Last Name must be at least 4 characters.")
-    .max(32, "Last Name must be at most 32 characters."),
-    Age : z
-    .coerce.number()
-    .min(18, "You must be at least 18 years old.")
-    .max(120, "You must be at most 120 years old."),
-    Email : z
-    .string()
-    .min(10, "Email must be at least 1 character.")
-    .max(50, "Email must be at most 50 characters.")
-    .email("Invalid email format."),
-    PhoneNo: z
-    .string()
-    .min(20, "Phone Number must be at least 20 characters.")
-    .max(100, "Phone Number must be at most 100 characters."),
-    isVerified : z
-    .boolean()
-    .default(false),
-    createdAt : z
-    .date()
-    .default(new Date()),
-})
+    .trim()
+    .min(4, "First name must be at least 4 characters.")
+    .max(32, "First name must not exceed 32 characters."),
 
+  LastName: z
+    .string()
+    .trim()
+    .min(4, "Last name must be at least 4 characters.")
+    .max(32, "Last name must not exceed 32 characters."),
 
-export type FormSchemaType = z.infer<typeof UserSchema> 
-export type FormOutputType = z.output<typeof UserSchema>
+  Age: z.coerce
+    .number()
+    .int("Age must be a whole number.")
+    .min(18, "Age must be at least 18.")
+    .max(120, "Age must be less than 120."),
+
+  Email: z
+    .string()
+    .trim()
+    .email("Please enter a valid email address."),
+
+  PhoneNo: z
+    .string()
+    .trim()
+    .regex(/^\d{10}$/, "Phone number must contain exactly 10 digits."),
+
+  isVerified: z.boolean(),
+
+  createdAt: z.string(),
+});
+
+export type UserFormValues = z.infer<typeof UserSchema>;

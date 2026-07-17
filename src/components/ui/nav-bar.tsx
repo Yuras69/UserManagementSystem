@@ -1,10 +1,10 @@
 "use client";
-import Logo from "@/assets/logo/logo";
 import { Button } from "@/components/ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { NavigationMenu, NavigationMenuItem, NavigationMenuLink, NavigationMenuList } from "@/components/ui/navigation-menu";
 import { cn } from "@/lib/utils";
 import { ArrowUpRight, TextAlignJustify } from "lucide-react";
+import type { MouseEvent } from "react";
 import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom'
 
@@ -15,8 +15,12 @@ export type NavigationSection = {
 
 const navigationData: NavigationSection[] = [
   {
-    title: "User",
-    href: "#",
+    title: "Home",
+    href: "/",
+  },
+  {
+    title: "Users",
+    href: "/add-user",
   },
   {
     title: "Reports",
@@ -52,6 +56,15 @@ const Navbar = () => {
   const [sticky, setSticky] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate()
+
+  const handleRoute = (event: MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (!href.startsWith("/")) return;
+
+    event.preventDefault();
+    setIsOpen(false);
+    navigate(href);
+  };
+
   const handleScroll = useCallback(() => {
     setSticky(window.scrollY >= 50);
   }, []);
@@ -82,8 +95,8 @@ const Navbar = () => {
                 : "bg-transparent border-transparent"
             )}
           >
-            <a href="#">
-              <img src = "/public/Logo.png" alt="logo" className="w-10 h-10" />
+            <a href="/" onClick={(event) => handleRoute(event, "/")} aria-label="Go to home">
+              <img src="/Logo.png" alt="Management system logo" className="h-10 w-10" />
             </a>
             <div>
               <NavigationMenu className="max-lg:hidden bg-muted p-0.5 rounded-full">
@@ -92,6 +105,7 @@ const Navbar = () => {
                     <NavigationMenuItem key={navItem.title}>
                       <NavigationMenuLink
                         href={navItem.href}
+                        onClick={(event) => handleRoute(event, navItem.href)}
                         className="px-2 lg:px-4 py-2 text-sm font-medium rounded-full text-muted-foreground hover:text-foreground hover:bg-background outline outline-transparent hover:outline-border hover:shadow-xs transition tracking-normal"
                       >
                         {navItem.title}
@@ -116,9 +130,24 @@ const Navbar = () => {
                 >
                   {navigationData.map((item) => (
                     <DropdownMenuItem key={item.title}>
-                      <a href={item.href} className="w-full cursor-pointer text-sm font-medium">{item.title}</a>
+                      <a
+                        href={item.href}
+                        onClick={(event) => handleRoute(event, item.href)}
+                        className="w-full cursor-pointer text-sm font-medium"
+                      >
+                        {item.title}
+                      </a>
                     </DropdownMenuItem>
                   ))}
+                  <DropdownMenuItem>
+                    <a
+                      href="/add-user"
+                      onClick={(event) => handleRoute(event, "/add-user")}
+                      className="w-full cursor-pointer text-sm font-medium text-primary"
+                    >
+                      Add User
+                    </a>
+                  </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
             </div>
