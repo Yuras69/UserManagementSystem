@@ -1,10 +1,10 @@
-import React from 'react'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import PublicLayout from './components/Layout/PublicLayout'
 import HomePage from './components/Pages/HomePage'
 import AddUser from './components/Pages/AddUser'
 import User from './components/Pages/User'
 import { Toaster } from './components/ui/sonner'
+import UserManagement from './components/Pages/UserManagement'
 
 const App = () => {
   const router = createBrowserRouter([
@@ -23,6 +23,10 @@ const App = () => {
         {
           path: '/user',
           element: <User />,
+        },
+        {
+          path: '/usermanagement',
+          element: <UserManagement />,
         },
       ],
     },
