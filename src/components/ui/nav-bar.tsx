@@ -36,7 +36,7 @@ const navigationData: NavigationSection[] = [
   },
   {
     title: "Settings",
-    href: "#",
+    href: "/settings",
   },
 
 ];
