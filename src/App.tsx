@@ -8,6 +8,7 @@ import UserManagement from './components/Pages/UserManagement'
 import Reports from './components/Pages/Reports'
 import Roles from './components/Pages/Roles'
 import Dashboard from './components/Pages/Dashboard'
+import Settings from './components/Pages/Settings'
 
 const App = () => {
   const router = createBrowserRouter([
@@ -42,6 +43,10 @@ const App = () => {
         {
           path: '/dashboard',
           element: <Dashboard />,
+        },
+        {
+          path: '/settings',
+          element: <Settings />,
         },
       ],
     },
