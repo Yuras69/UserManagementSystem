@@ -5,6 +5,9 @@ import AddUser from './components/Pages/AddUser'
 import User from './components/Pages/User'
 import { Toaster } from './components/ui/sonner'
 import UserManagement from './components/Pages/UserManagement'
+import Reports from './components/Pages/Reports'
+import Roles from './components/Pages/Roles'
+import Dashboard from './components/Pages/Dashboard'
 
 const App = () => {
   const router = createBrowserRouter([
@@ -27,6 +30,18 @@ const App = () => {
         {
           path: '/usermanagement',
           element: <UserManagement />,
+        },
+        {
+          path: '/reports',
+          element: <Reports />,
+        },
+        {
+          path: '/roles',
+          element: <Roles />,
+        },
+        {
+          path: '/dashboard',
+          element: <Dashboard />,
         },
       ],
     },

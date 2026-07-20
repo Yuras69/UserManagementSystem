@@ -24,15 +24,15 @@ const navigationData: NavigationSection[] = [
   },
   {
     title: "Reports",
-    href: "#",
+    href: "/reports",
   },
   {
     title: "Roles",
-    href: "#",
+    href: "/roles",
   },
   {
     title: "Dashboard",
-    href: "#",
+    href: "/dashboard",
   },
   {
     title: "Settings",
