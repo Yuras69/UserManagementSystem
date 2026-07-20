@@ -7,6 +7,7 @@ import { Toaster } from './components/ui/sonner'
 import UserManagement from './components/Pages/UserManagement'
 import Reports from './components/Pages/Reports'
 import Roles from './components/Pages/Roles'
+import Dashboard from './components/Pages/Dashboard'
 
 const App = () => {
   const router = createBrowserRouter([
@@ -37,6 +38,10 @@ const App = () => {
         {
           path: '/roles',
           element: <Roles />,
+        },
+        {
+          path: '/dashboard',
+          element: <Dashboard />,
         },
       ],
     },
