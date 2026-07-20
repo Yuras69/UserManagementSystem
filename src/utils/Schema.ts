@@ -29,9 +29,21 @@ export const UserSchema = z.object({
     .trim()
     .regex(/^\d{10}$/, "Phone number must contain exactly 10 digits."),
 
-  isVerified: z.boolean(),
+  Image: z.string().trim().url("Please enter a valid image URL."),
 
-  createdAt: z.string(),
+  isVerified: z.boolean().refine((value) => value, {
+    message: "You must mark the user as verified.",
+  }),
+
+  createdAt: z
+    .string()
+    .trim()
+    .min(1, "Please choose a date.")
+    .refine(
+      (date) => date <= new Date().toLocaleDateString("en-US"),
+      "Date must be today or in the past.",
+    ),
 });
 
 export type UserFormValues = z.infer<typeof UserSchema>;
+

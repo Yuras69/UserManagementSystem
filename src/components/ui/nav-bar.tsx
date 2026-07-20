@@ -20,7 +20,7 @@ const navigationData: NavigationSection[] = [
   },
   {
     title: "Users",
-    href: "/add-user",
+    href: "/user",
   },
   {
     title: "Reports",
